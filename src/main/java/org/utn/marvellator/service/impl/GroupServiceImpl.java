@@ -10,13 +10,11 @@ import org.utn.marvellator.model.User;
 import org.utn.marvellator.repository.GroupRepository;
 import org.utn.marvellator.service.CharacterService;
 import org.utn.marvellator.service.GroupService;
+import org.utn.marvellator.service.UserService;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +25,10 @@ public class GroupServiceImpl implements GroupService {
 
 		@Autowired
 		private CharacterService characterService;
+
+		@Autowired
+		private UserService userService;
+
 
     @Override
     public Group createGroup(String newGroupName, String creatorName) {
@@ -77,7 +79,7 @@ public class GroupServiceImpl implements GroupService {
 		}
 
 		@Override
-		public List<GroupCharacter> getAvailableCharactersForGroup(Group group, Integer page) throws IOException, NoSuchAlgorithmException {
+		public List<GroupCharacter> getAvailableCharactersForGroup(Group group, Integer page) throws IOException {
 			List<MarvelCharacter> characters = characterService.charactersPage(page);
 			List<GroupCharacter> groupCharacters = new ArrayList<>();
 			for (MarvelCharacter character : characters){
@@ -93,4 +95,14 @@ public class GroupServiceImpl implements GroupService {
 			}
 			return groupCharacters;
 		}
+
+	@Override
+	public List<Group> getAllGroupsFromAllCharacters() {
+		List<User> users = userService.getAllUsers();
+		List<Group> groups = new ArrayList<>();
+		for (User u : users){
+			groups.addAll(groupRepository.findByCreator(u.getUserName()));
+		}
+		return groups;
+	}
 }
