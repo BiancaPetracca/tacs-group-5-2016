@@ -3,7 +3,7 @@ cd $OPENSHIFT_DATA_DIR
 
 if [ ! -d apache-maven-3.3.9 ]; then
   wget http://mirrors.dcarsat.com.ar/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-  tar -zxf apache-maven-3.3.3-bin.tar.gz
+  tar -zxf apache-maven-3.3.9-bin.tar.gz
 fi
 
 if [ ! -d jdk1.8.0_65 ]; then
