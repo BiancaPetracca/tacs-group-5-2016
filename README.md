@@ -10,7 +10,7 @@ Run project:
 $ mvn clean install
 $ mvn spring-boot:run
 ```
-Attach debugger to port 5005.
+Attach debugger to port 5005 to start debugging
 
 Then navigate to localhost:8080
 
