@@ -2,6 +2,7 @@ package org.utn.marvellator.repository;
 
 import org.apache.coyote.http11.upgrade.NioServletOutputStream;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,16 +34,17 @@ public class UserRepositoryTest {
     @Autowired
     FavoritesService favoritesService;
 
+    @Before
     @After
     public void clean() {
         userRepository.deleteAll();
     }
 
-//    @Test
-//    public void shouldSaveNewUsers() {
-//        userRepository.save(new User("test1"));
-//        assertEquals(2, userRepository.count());
-//    }
+    @Test
+    public void shouldSaveNewUsers() {
+        userRepository.save(new User("test1"));
+        assertEquals(1, userRepository.count());
+    }
 
     @Test
     public void shouldFindUserByUserName() {
